@@ -19,6 +19,7 @@ return new class extends Migration
             $table->float("amount_required", 12,4);
             $table->integer("loan_terms");
             $table->enum("loan_status", ["PENDING", "APPROVED", "REJECTED"])->default("PENDING");
+            $table->enum("is_loan_paid", ["PENDING", "PAID"]);
             $table->timestamps();
             $table->foreign("user_id")->references("id")->on("users")->onDelete("CASCADE");
         });

@@ -20,4 +20,9 @@ class Loan extends Model
         return $this->belongsTo(User::class, "user_id", "id");
     }
 
+    public function terms()
+    {
+        return $this->hasMany(Term::class,"loan_id", "id");
+    }
+
 }

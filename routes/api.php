@@ -27,6 +27,8 @@ Route::group(["middleware" => ["auth:sanctum", "abilities:access-customer"]], fu
     Route::controller(LoanController::class)->group(function () {
         Route::post("/create-loan", "store")->name("loan.store");
         Route::get("/current-user-loans", "getCurrentUserLoan")->name("loan.current-user-loans");
+        Route::get("/get-loan/{loan}", "getLoan")->name("loan.get-loan");
+        Route::post("/repay-loan-term/{loan}", "repayLoanTerm")->name("loan.repay-loan-term");
     });
 });
 
@@ -35,5 +37,6 @@ Route::group(["middleware" => ["auth:admin"], "prefix" => "admin"], function () 
     Route::controller(AdminController::class)->group(function() {
         Route::get("/current-admin", fn(Request $request) => $request->user())->name("admin.get-user");
     });
+    Route::get("/get-all-loan", [LoanController::class, "getAllLoan"])->name("loan.get-all-loan");
     Route::post("/approve-loan/{loan}", [LoanController::class, "approveLoan"])->name("loan.approve");
 });
