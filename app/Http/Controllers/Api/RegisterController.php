@@ -7,6 +7,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\Response;
 
 class RegisterController extends Controller
 {
@@ -22,8 +23,8 @@ class RegisterController extends Controller
 
         return response()->json([
             "message" => "Registered successfully, Please copy following access token You can successfully access API endpoints with this token but if you lost it then just call login API and it will flush all previous token and create new one for you",
-            "accessToken" => $user->createToken("LoginToken")->plainTextToken
-        ], 200);
+            "accessToken" => $user->createToken("LoginToken",["access-customer"])->plainTextToken
+        ], Response::HTTP_CREATED);
 
     }
 }

@@ -2,12 +2,12 @@
 
 namespace App\Http\Requests;
 
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
-class LoginRequest extends FormRequest
+class AdminLoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -35,7 +35,7 @@ class LoginRequest extends FormRequest
     public function attributes()
     {
         return [
-            "email" => "User Email",
+            "email" => "Admin User Email",
             "password" => "Password"
         ];
     }
@@ -43,19 +43,18 @@ class LoginRequest extends FormRequest
     public function authenticate()
     {
         $validated = $this->safe()->all();
-        $user = User::where("email", $validated["email"])->first();
-        if (empty($user) || !Hash::check($validated["password"], $user->password)) {
+        $admin = Admin::where("email", $validated["email"])->first();
+        if (empty($admin) || !Hash::check($validated["password"], $admin->password)) {
             return response()->json([
                 "message" => "User or Password mismatched, Please try again",
             ], Response::HTTP_NON_AUTHORITATIVE_INFORMATION);
         }
 
-        $user->tokens()->delete();
+        $admin->tokens()->delete();
 
         return response()->json([
             "message" => "Credentials are matched, Please copy this accessToken for future API calls",
-            "accessToken" => $user->createToken("LoginToken",['access-customer'])->plainTextToken
+            "accessToken" => $admin->createToken("LoginToken", ['access-customer'])->plainTextToken
         ], Response::HTTP_CREATED);
-
     }
 }
