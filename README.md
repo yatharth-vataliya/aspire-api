@@ -1,66 +1,64 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Steps to set up and use this APP
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> First of all clone repo from below mentioned link
 
-## About Laravel
+```shell
+git clone https://github.com/yatharth-vataliya/aspire-api
+````
+> Then go to root director of project and run following command in terminal (Assuming you are using Ubuntu or Linux os)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+```shell
+composer install
+cp .env.example .env
+php artisan key:generate
+```
+> Then go to .env file and set up APP_TIMEZONE, APP_NAME, DB_HOST, DB_DATABASE, DB_USERNAME and DB_PASSWORD as you preferred.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+> after setting database credentials run following command
+```shell
+php artisan migrate:fresh --seed
+php artisan serve
+```
+> Now app is running
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+> It will create database tables for you and generate 2 dummy customer user and 1 admin user.
 
-## Learning Laravel
+> Then open post this postman link `https://www.postman.com/security-technologist-1642160/workspace/aspire-work` it contains all necessary API endpoints.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+> Now you can login through dummy customer user and password and password is `password` and you get a `accessToken` in response so save that to anywhere else and go to above mentioned postman link and `export aspire-api collection` and it will download file in your PC. 
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+> Then open postman client in your pc locally and import that collections into your postman client.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+> Then create one environment for customer user and other environment for admin user.
 
-## Laravel Sponsors
+> Then create two global variable in both environment as following 
+> 1. `host` and value is `localhost:8000/api`
+> 2. Now call `Register User` API and fill data as you want then call it. In repose you will get `accessToken` then you have to set that token as  `token` variable and you have to do same process for getting admin token but with different api call `Login (Get Admin access Token)` and email and admin is `admin@gmail.com` and password is `password`.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+> Note :- you have to create new admin by yourself then just run following command
+```shell
+php artisan CreateAdminUser
+```
+> Now you can `Create Loan` end-point and fill data as you want.
 
-### Premium Partners
+> Then switch to Admin user environment and call `Get All Loan` end-point and you will see list of loans that customer created. And pick a loan number that you wish to approve.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+> Then call `Approve Loan` end-point with loan id and fill data as you want.
 
-## Contributing
+> Then again switch to customer user environment and call `Repay Loan Term` with approved loan id to pay weekly payment.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+# For testing
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+> Run following command
+```shell
+cp .env .env.testing
+```
+> and fill APP_TIMEZONE, APP_NAME, DB_HOST, DB_DATABASE, DB_USERNAME and DB_PASSWORD as you preferred but it will used for testing only. If you don't create this file then original .env file used as testing file.
 
-## Security Vulnerabilities
+> Then just run following command
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```shell
+php artisan test
+```
