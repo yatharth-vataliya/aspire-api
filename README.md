@@ -23,7 +23,7 @@ php artisan serve
 
 > It will create database tables for you and generate 2 dummy customer user and 1 admin user.
 
-> Then open this postman link `https://www.postman.com/security-technologist-1642160/workspace/aspire-work` it contains all necessary API endpoints.
+> Then open this postman link `https://www.postman.com/security-technologist-1642160/workspace/aspire-work` it contains all necessary API endpoints. And you can direct use through web browser also but you want to use PC app then just follow below mentioned steps.
 
 > Now you can login through dummy customer user and password and password is `password` and you get a `accessToken` in response so save that to anywhere else and go to above mentioned postman link and `export aspire-api collection` and it will download file in your PC. 
 
@@ -39,9 +39,9 @@ php artisan serve
 ```shell
 php artisan CreateAdminUser
 ```
-> Now you can `Create Loan` end-point and fill data as you want.
+> Now you can call `Create Loan` end-point and fill data as you want.
 
-> Then switch to Admin user environment and call `Get All Loan` end-point and you will see list of loans that customer created. And pick a loan number that you wish to approve.
+> Then switch to Admin user environment and call `Get All Loan` end-point and you will see list of loans that customer created. And pick a loan id that you wish to approve.
 
 > Then call `Approve Loan` end-point with loan id and fill data as you want.
 
