@@ -23,7 +23,7 @@ php artisan serve
 
 > It will create database tables for you and generate 2 dummy customer user and 1 admin user.
 
-> Then open post this postman link `https://www.postman.com/security-technologist-1642160/workspace/aspire-work` it contains all necessary API endpoints.
+> Then open this postman link `https://www.postman.com/security-technologist-1642160/workspace/aspire-work` it contains all necessary API endpoints.
 
 > Now you can login through dummy customer user and password and password is `password` and you get a `accessToken` in response so save that to anywhere else and go to above mentioned postman link and `export aspire-api collection` and it will download file in your PC. 
 
