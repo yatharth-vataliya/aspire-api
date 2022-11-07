@@ -33,7 +33,7 @@ php artisan serve
 
 > Then create two global variable in both environment as following 
 > 1. `host` and value is `localhost:8000/api`
-> 2. Now call `Register User` API and fill data as you want then call it. In repose you will get `accessToken` then you have to set that token as  `token` variable and you have to do same process for getting admin token but with different api call `Login (Get Admin access Token)` and email and admin is `admin@gmail.com` and password is `password`.
+> 2. Now call `Register User` API and fill data as you want then call it. In repose you will get `accessToken` then you have to set that token as  `token` variable and you have to do same process for getting admin token but with different api call `Login (Get Admin access Token)` and email for admin is `admin@gmail.com` and password is `password`.
 
 > Note :- you have to create new admin by yourself then just run following command
 ```shell
